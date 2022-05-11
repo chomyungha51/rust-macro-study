@@ -19,27 +19,35 @@ MacroRepOp
 */
 
 #[macro_export]
-macro_rules! custom_println_macro {
-    ($arg:int) => { println!("{}", $arg);};
-    (expr) => (expr);
+macro_rules! print_items {
+    ($($arg:tt), *) => {
+        $(print!("{}", $arg);)*
+    };
 }
 
 #[macro_export]
-macro_rules! custom_vec_macro {
-    () => ();
-    () => ();
-    () => ();
+macro_rules! println_items {
+    ($($arg:tt), *) => {
+        $(println!("{ }", $arg);)*
+    };
 }
 
 #[macro_export]
-macro_rules! to_str {
-    () => ();
-    () => ();
+macro_rules! get_length {
+   ($arg:expr) => {
+        let mut count = 0;
+        for i in $arg {
+            count++;
+        }
+   };
 }
 
 fn main() {
 
-    custom_println_macro!();
-    custom_vec_macro!();
-    to_str!();
+    print_items!(1, "two", 3);
+
+    println!();
+
+    println_items!("first line", "second line", "third line" );
+
 }
